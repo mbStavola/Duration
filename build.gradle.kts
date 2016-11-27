@@ -1,4 +1,4 @@
-group = "stavola.xyz"
+group = "xyz.stavola.duration"
 version = "1.0-SNAPSHOT"
 
 buildscript {

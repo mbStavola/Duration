@@ -3,7 +3,6 @@ This is a simple library to represent an immutable length of time, provided a qu
 
 
 ## Documentation
-
 Durations are simple to create:
 ```kotlin
 // Direct instantiation
@@ -39,18 +38,7 @@ val dividedUnit = fiveDays / TimeUnit.DAY
 // Increment / Decrement also works
 val sixDays = fiveDays++
 val oneHour = twoHours--
-```
 
-You may also use a Duration in a range:
-```kotlin
-val twoDays = TimeUnit.DAYS(2)
-val oneWeek = TimeUnit.DAYS(7)
-
-// Range check
-val inRange = TimeUnit.DAYS(3) in twoDays..oneWeek
-
-// Loops + step
-for (duration in twoDays..oneWeek step 2) {
-    println(duration)
-}
+// You can even do a range check
+val isInRange = TimeUnit.SECONDS(10) in TimeUnit.DAYS(1) 
 ```
