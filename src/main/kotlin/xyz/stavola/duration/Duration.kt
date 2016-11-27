@@ -25,10 +25,29 @@ data class Duration(
     operator fun times(unit: TimeUnit) = this * unit(1)
     operator fun div(unit: TimeUnit) = this / unit(1)
 
-    operator fun plus(duration: Duration) = this + duration.convertTo(unit).value
-    operator fun minus(duration: Duration) = this - duration.convertTo(unit).value
-    operator fun times(duration: Duration) = this * duration.convertTo(unit).value
-    operator fun div(duration: Duration) = this / duration.convertTo(unit).value
+    operator fun plus(duration: Duration): Duration {
+        val (first, second) = normalize(duration)
+
+        return first + second.value
+    }
+
+    operator fun minus(duration: Duration): Duration {
+        val (first, second) = normalize(duration)
+
+        return first - second.value
+    }
+
+    operator fun times(duration: Duration): Duration {
+        val (first, second) = normalize(duration)
+
+        return first * second.value
+    }
+
+    operator fun div(duration: Duration): Duration {
+        val (first, second) = normalize(duration)
+
+        return first / second.value
+    }
 
     operator fun contains(other: Duration): Boolean {
         return if (this.unit == other.unit) {
@@ -39,12 +58,22 @@ data class Duration(
     }
 
     override operator fun compareTo(other: Duration): Int {
-        val converted = other.convertTo(unit)
+        val (first, second) = normalize(other)
 
-        return this.value.compareTo(converted.value)
+        return first.value.compareTo(second.value)
     }
 
     fun convertTo(unit: TimeUnit) = Duration(unit.convert(value, this.unit), unit)
+
+    private fun normalize(other: Duration): Pair<Duration, Duration> {
+        return if (this.unit > other.unit) {
+            this.convertTo(other.unit) to other
+        } else if (this.unit < other.unit) {
+            this to other.convertTo(this.unit)
+        } else {
+            this to other
+        }
+    }
 }
 
 operator fun TimeUnit.invoke(value: Long) = Duration(value, this)
