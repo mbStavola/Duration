@@ -26,5 +26,9 @@ val versions = mapOf(
 dependencies {
     compile(kotlinModule("stdlib", "1.0.5"))
 
+    subprojects.forEach {
+        testCompile(it.buildDir)
+    }
+
     testCompile(group="junit", name="junit", version=versions["junit"])
 }
