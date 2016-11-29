@@ -90,6 +90,14 @@ class DurationTest {
         assertEquals(TimeUnit.HOURS(24), a.convertTo(TimeUnit.HOURS))
     }
 
+    @Test fun `duration equality`() {
+        val oneDay = TimeUnit.DAYS(1)
+        val twentyFourHours = TimeUnit.HOURS(24)
+
+        assertTrue(oneDay == TimeUnit.DAYS(1))
+        assertTrue(oneDay == twentyFourHours)
+    }
+
     @Test fun `duration comparison`() {
         val fourDays = TimeUnit.DAYS(4)
         val sixDays = TimeUnit.DAYS(6)

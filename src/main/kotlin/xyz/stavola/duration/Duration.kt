@@ -63,6 +63,10 @@ data class Duration(
         return first.value.compareTo(second.value)
     }
 
+    override fun equals(other: Any?): Boolean {
+        return other is Duration && compareTo(other) == 0
+    }
+
     fun convertTo(unit: TimeUnit) = Duration(unit.convert(value, this.unit), unit)
 
     private fun normalize(other: Duration): Pair<Duration, Duration> {
