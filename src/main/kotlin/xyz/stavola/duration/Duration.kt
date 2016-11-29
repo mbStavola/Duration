@@ -57,16 +57,6 @@ data class Duration(
         }
     }
 
-    override operator fun compareTo(other: Duration): Int {
-        val (first, second) = normalize(other)
-
-        return first.value.compareTo(second.value)
-    }
-
-    override fun equals(other: Any?): Boolean {
-        return other is Duration && compareTo(other) == 0
-    }
-
     fun convertTo(unit: TimeUnit) = Duration(unit.convert(value, this.unit), unit)
 
     private fun normalize(other: Duration): Pair<Duration, Duration> {
@@ -77,6 +67,22 @@ data class Duration(
         } else {
             this to other
         }
+    }
+
+    override operator fun compareTo(other: Duration): Int {
+        val (first, second) = normalize(other)
+
+        return first.value.compareTo(second.value)
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return other is Duration && compareTo(other) == 0
+    }
+
+    override fun hashCode(): Int {
+        var result = value.hashCode()
+        result = 31 * result + unit.hashCode()
+        return result
     }
 }
 
