@@ -57,7 +57,8 @@ data class Duration(
         }
     }
 
-    fun convertTo(unit: TimeUnit) = Duration(unit.convert(value, this.unit), unit)
+    infix fun convertTo(unit: TimeUnit) =
+            Duration(unit.convert(value, this.unit), unit)
 
     private fun normalize(other: Duration): Pair<Duration, Duration> {
         return if (this.unit > other.unit) {

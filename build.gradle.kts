@@ -13,6 +13,7 @@ buildscript {
 
 apply {
     plugin("kotlin")
+    plugin("maven")
 }
 
 repositories {
@@ -20,11 +21,12 @@ repositories {
 }
 
 val versions = mapOf(
+        "kotlin" to "1.0.6",
         "junit" to "4.12"
 )
 
 dependencies {
-    compile(kotlinModule("stdlib", "1.0.5"))
+    compile(kotlinModule("stdlib", versions["kotlin"]))
 
     subprojects.forEach {
         testCompile(it.buildDir)

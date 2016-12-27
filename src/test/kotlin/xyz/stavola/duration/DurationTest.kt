@@ -87,7 +87,7 @@ class DurationTest {
     @Test fun `simple conversion`() {
         val a = TimeUnit.DAYS(1)
 
-        assertEquals(TimeUnit.HOURS(24), a.convertTo(TimeUnit.HOURS))
+        assertEquals(TimeUnit.HOURS(24), a convertTo TimeUnit.HOURS)
     }
 
     @Test fun `duration equality`() {
