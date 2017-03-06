@@ -21,7 +21,7 @@ repositories {
 }
 
 val versions = mapOf(
-        "kotlin" to "1.0.6",
+        "kotlin" to "1.1.0",
         "junit" to "4.12"
 )
 
